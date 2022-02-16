@@ -1,0 +1,108 @@
+﻿@using WorldClockApp.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model FormModel
+<div class="row">
+    <div class="col-3">
+        <div class="row">
+            <div class="col-12">
+                <form asp-action="Search" asp-controller="Home">
+                    <div class="form-group">
+                        <label asp-for="CityName">City Name</label>
+                        <input class="form-control" asp-for="CityName" placeholder="Enter City Name here" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <br />
+                    </div>
+                    <div class="form-group">
+                        <label for="Continentselect">Continent Name</label>                        
+                        <select  id="Continentselect" class="form-select" asp-for="ContinentName" asp-items="Model.ContinentList" required="required"></select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        @if (@Model != null)
+        {
+            @if (@Model.message != string.Empty)
+            {
+                <table class="table table-bordered">
+                    <tbody>
+                        @if (@Model.client_ip != null)
+                        {
+                            <tr>
+                                <td>IP Address </td>
+                                <td>@Model.client_ip</td>
+                            </tr>
+                        }
+                        @if (@Model.timezone != null)
+                        {
+                            <tr>
+                                <td>Time Zone </td>
+                                <td>@Model.timezone</td>
+                            </tr>
+                        }
+                        @if (@Model.abbreviation != null)
+                        {
+                            <tr>
+                                <td>Time Zone Abbreviation</td>
+                                <td>@Model.abbreviation</td>
+                            </tr>
+                        }
+                        @if (@Model.Datetime != null)
+                        {
+                            <tr>
+                                <td> Local Date & Time </td>
+                                <td>@Model.Datetime</td>
+                            </tr>
+                        }
+                        @if (@Model.Utc_Datetime != null)
+                        {
+                            <tr>
+                                <td> Universal Time Coordinated Date & Time </td>
+                                <td>@Model.Utc_Datetime</td>
+                            </tr>
+                        }
+                        @if (@Model.Dst != null)
+                        {
+                            <tr>
+                                <td>DayLight Saving Time </td>
+                                <td>@Model.Dst</td>
+                            </tr>
+                        }
+                        @* @if (@Model.DstFrom != null)
+                            {
+                            <tr>
+                            <td>DayLight Saving Time begins </td>
+                            <td>@Model.DstFrom</td>
+                            </tr>
+                            }
+                            @if (@Model.DstUntil != null)
+                            {
+                            <tr>
+                            <td>DayLight Saving Time ends </td>
+                            <td>@Model.DstUntil</td>
+                            </tr>
+                            }*@
+
+                        @if (@Model.Unixtime != null)
+                        {
+                            <tr>
+                                <td>Unix time </td>
+                                <td>@Model.Unixtime</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <spam>@Model.message</spam>
+            }
+        }
+    </div>
+</div>
+
